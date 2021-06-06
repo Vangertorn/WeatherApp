@@ -1,9 +1,11 @@
 package com.example.weatherapp.repository
 
+import android.location.Location
 import com.example.weatherapp.cloud.CloudInterface
 import com.example.weatherapp.models.WeatherInfo
 
 class CloudRepository(private val cloudInterface: CloudInterface) {
+    var current_location: Location? = null
 
     suspend fun importWeather(): Boolean {
         val response = cloudInterface.importWeather("0","0", API_KEY)

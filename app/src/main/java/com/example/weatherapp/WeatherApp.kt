@@ -2,19 +2,31 @@ package com.example.weatherapp
 
 import android.app.Application
 import com.example.weatherapp.cloud.CloudInterface
+import com.example.weatherapp.repository.CloudRepository
+import com.example.weatherapp.screen.main_fragment.MainFragmentViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import org.koin.android.viewmodel.dsl.viewModel
 
-class WeatherApp: Application() {
+class WeatherApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidContext(this@WeatherApp)
-            modules(listOf(cloudModule))
+            modules(listOf(cloudModule, viewModel, repository))
         }
     }
+
+    private val viewModel = module {
+        viewModel { MainFragmentViewModel(get()) }
+    }
+
     private val cloudModule = module {
         factory { CloudInterface.get() }
+    }
+
+    private val repository = module {
+        factory { CloudRepository(get()) }
     }
 }
