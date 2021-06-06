@@ -1,0 +1,36 @@
+package com.example.weatherapp.cloud
+
+import com.example.weatherapp.BuildConfig
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface CloudInterface {
+    @GET("weather")
+    suspend fun importWeather(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("appid") apiId: String
+    ): Response<List<WeatherCloudResult>>
+
+
+    companion object {
+
+        private const val API_URL = "http://api.openweathermap.org/data/2.5/"
+
+        fun get(): CloudInterface =
+            Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create())
+                .client(
+                    OkHttpClient.Builder().apply {
+                        if (BuildConfig.DEBUG) {
+                            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                        }
+                    }.build()
+                ).build().create(CloudInterface::class.java)
+    }
+}
