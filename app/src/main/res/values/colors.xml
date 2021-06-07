@@ -9,4 +9,6 @@
     <color name="textColorPrimary"> #ffffffff</color>
     <color name="windowsBackground">#ffffffff</color>
     <color name="navigationBarColor"> #000000</color>
+    <color name="imageWeather">#ED871B</color>
+    <color name="grey">#A7CBCF</color>
 </resources>

@@ -46,6 +46,7 @@ class MainFragment() :
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         viewBinding.appBar.setPadding(0, top, 0, 0)
+        viewBinding.relativeLayout.setPadding(0,0,0,bottom)
     }
 
     override fun onPermissionsChecked(report: MultiplePermissionsReport?) {

@@ -15,12 +15,12 @@ interface CloudInterface {
         @Query("lat") lat: String,
         @Query("lon") lon: String,
         @Query("appid") apiId: String
-    ): Response<List<WeatherCloudResult>>
+    ): Response<WeatherCloudResult>
 
 
     companion object {
 
-        private const val API_URL = "http://api.openweathermap.org/data/2.5/"
+        private const val API_URL = "https://api.openweathermap.org/data/2.5/"
 
         fun get(): CloudInterface =
             Retrofit.Builder().baseUrl(API_URL).addConverterFactory(GsonConverterFactory.create())

@@ -1,13 +1,18 @@
 package com.example.weatherapp.screen.main_fragment
 
 import android.location.Location
-import com.example.weatherapp.repository.CloudRepository
-import com.example.weatherapp.support.CoroutineViewModel
+import com.example.weatherapp.datastore.AppSettings
 
-class MainFragmentViewModel(private val cloudRepository: CloudRepository) : CoroutineViewModel() {
+import com.example.weatherapp.support.CoroutineViewModel
+import kotlinx.coroutines.launch
+
+class MainFragmentViewModel(private val appSettings: AppSettings) : CoroutineViewModel() {
 
     fun saveLocation(locationResult: Location) {
-        cloudRepository.current_location = locationResult
+        launch {
+            appSettings.setLat(locationResult.latitude)
+            appSettings.setLon(locationResult.longitude)
         }
     }
+}
 
