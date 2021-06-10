@@ -2,6 +2,7 @@ package com.example.weatherapp.screen.forecast_fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentForecastBinding
@@ -16,10 +17,12 @@ class ForecastFragment : SupportFragmentInset<FragmentForecastBinding>(R.layout.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.requestForecastWeatherInfo()
+        viewBinding.indicatorProgress.isVisible = true
         viewModel.weatherForecastInfoLiveData.observe(this.viewLifecycleOwner) {
             val adapter = ForecastWeatherRecyclerViewAdapter(it)
             viewBinding.recyclerViewWeather.adapter = adapter
             viewBinding.toolbarTitle.text = it.city.name
+            viewBinding.indicatorProgress.isVisible = false
         }
     }
 

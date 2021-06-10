@@ -1,5 +1,6 @@
 package com.example.weatherapp.cloud
 
+import com.example.weatherapp.models.*
 import com.google.gson.annotations.SerializedName
 
 data class WeatherForecastCloudResult(
@@ -10,16 +11,7 @@ data class WeatherForecastCloudResult(
     val city: City
 )
 
-data class City(
-    val id: Long,
-    val name: String,
-    val coord: Coord,
-    val country: String,
-    val population: Long,
-    val timezone: Long,
-    val sunrise: Long,
-    val sunset: Long
-)
+
 
 data class ListElement(
     val dt: Long,
@@ -35,38 +27,11 @@ data class ListElement(
     val dtTxt: String,
 
     val rain: Rain? = null
+) : AdapterList(
 )
 
-data class Rain(
-    @SerializedName("3h")
-    val the3H: Double
-)
+data class Day(val day: String) : AdapterList()
 
-data class MainClass(
-    val temp: Double,
-
-    @SerializedName("feels_like")
-    val feelsLike: Double,
-
-    @SerializedName("temp_min")
-    val tempMin: Double,
-
-    @SerializedName("temp_max")
-    val tempMax: Double,
-
-    val pressure: Long,
-
-    @SerializedName("sea_level")
-    val seaLevel: Long,
-
-    @SerializedName("grnd_level")
-    val grndLevel: Long,
-
-    val humidity: Long,
-
-    @SerializedName("temp_kf")
-    val tempKf: Double
-)
 
 data class WeatherCloudResult(
 
@@ -85,48 +50,13 @@ data class WeatherCloudResult(
     val cod: Long
 )
 
-data class Clouds(
-    val all: Long
-)
 
-data class Coord(
-    val lon: Double,
-    val lat: Double
-)
 
-data class Main(
-    val temp: Double,
 
-    @SerializedName("feels_like")
-    val feelsLike: Double,
 
-    @SerializedName("temp_min")
-    val tempMin: Double,
 
-    @SerializedName("temp_max")
-    val tempMax: Double,
 
-    val pressure: Long,
-    val humidity: Long
-)
 
-data class Sys(
-    val type: Long,
-    val id: Long,
-    val country: String,
-    val sunrise: Long,
-    val sunset: Long
-)
 
-data class Weather(
-    val id: Long,
-    val main: String,
-    val description: String,
-    val icon: String
-)
 
-data class Wind(
-    val speed: Double,
-    val deg: Long,
-    val gust: Double
-)
+

@@ -1,6 +1,5 @@
 package com.example.weatherapp.models
 
-import com.example.weatherapp.cloud.*
 
 data class WeatherInfo(
     val coord: Coord,

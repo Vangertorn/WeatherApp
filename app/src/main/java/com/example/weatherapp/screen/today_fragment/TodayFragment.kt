@@ -3,6 +3,7 @@ package com.example.weatherapp.screen.today_fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentTodayBinding
@@ -22,6 +23,7 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.requestWeatherInfo()
+        viewBinding.indicatorProgress.isVisible = true
         viewBinding.btnShare.setOnClickListener {
 
         }
@@ -48,6 +50,7 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
             viewBinding.tvGustWind.text = it.wind.gust.toString()
 
             viewBinding.tvSpeedWind.text = it.wind.speed.toString()
+            viewBinding.indicatorProgress.isVisible = false
 
 
         }
