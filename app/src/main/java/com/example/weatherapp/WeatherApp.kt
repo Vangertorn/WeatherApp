@@ -21,7 +21,7 @@ class WeatherApp : Application() {
     }
 
     private val viewModel = module {
-        viewModel { TodayFragmentViewModel(get()) }
+        viewModel { TodayFragmentViewModel(get(), get()) }
         viewModel { MainActivityViewModel(get()) }
         viewModel { ForecastFragmentViewModel(get()) }
     }

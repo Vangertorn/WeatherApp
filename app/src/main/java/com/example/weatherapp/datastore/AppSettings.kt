@@ -16,10 +16,10 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("$
 class AppSettings(context: Context) {
     private val dataStore = context.dataStore
 
-    private fun coordinatesLonFlow(): Flow<Double> = dataStore.data.map { preferense ->
+    fun coordinatesLonFlow(): Flow<Double> = dataStore.data.map { preferense ->
         preferense[doublePreferencesKey(LON_KEY)] ?: 0.0
     }
-    private fun coordinatesLatFlow(): Flow<Double> = dataStore.data.map { preferense ->
+     fun coordinatesLatFlow(): Flow<Double> = dataStore.data.map { preferense ->
         preferense[doublePreferencesKey(LAT_KEY)] ?: 0.0
     }
     suspend fun getLat():Double = coordinatesLatFlow().first()

@@ -1,6 +1,7 @@
 package com.example.weatherapp.screen.today_fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -21,44 +22,56 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.requestWeatherInfo()
-        viewBinding.indicatorProgress.isVisible = true
-        viewBinding.btnShare.setOnClickListener {
-
+        viewModel.coordinatesLatLiveData.observe(this.viewLifecycleOwner) {
+            viewModel.requestWeatherInfo()
+            viewBinding.indicatorProgress.isVisible = true
         }
 
-        viewModel.weatherInfoLiveData.observe(this.viewLifecycleOwner) {
+
+        viewModel.weatherInfoLiveData.observe(this.viewLifecycleOwner) { WeatherInfo ->
             val picasso = Picasso.Builder(requireContext())
                 .listener { _, _, exception -> exception.printStackTrace() }.build()
 
-            picasso.load("$IMAGE_URI${it.weather[0].icon}@2x.png").fit().error(R.drawable.ic_cloud)
+            picasso.load("$IMAGE_URI${WeatherInfo.weather[0].icon}@2x.png").fit()
+                .error(R.drawable.ic_cloud)
                 .into(viewBinding.ivWeather)
 
-            viewBinding.tvLocation.text = "${it.name}, ${it.sys.country}"
+            viewBinding.tvLocation.text = "${WeatherInfo.name}, ${WeatherInfo.sys.country}"
 
-            viewBinding.tvWeatherTitle.text = "${
-                (it.main.temp - 273).toBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
-            } | ${it.weather[0].main}"
+            val temp =
+                (WeatherInfo.main.temp - 273).toBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
+            viewBinding.tvWeatherTitle.text = "$temp | ${WeatherInfo.weather[0].main}"
 
-            viewBinding.tvHumidity.text = it.main.humidity.toString()
+            viewBinding.tvHumidity.text = "${WeatherInfo.main.humidity}%"
 
-            viewBinding.tvPressure.text = it.main.pressure.toString()
+            viewBinding.tvPressure.text = "${WeatherInfo.main.pressure} hPa"
 
-            viewBinding.tvClouds.text = it.clouds.all.toString()
+            viewBinding.tvClouds.text = "${WeatherInfo.clouds.all}%"
 
-            viewBinding.tvGustWind.text = it.wind.gust.toString()
+            viewBinding.tvGustWind.text = "${WeatherInfo.wind.gust} m/s"
 
-            viewBinding.tvSpeedWind.text = it.wind.speed.toString()
+            viewBinding.tvSpeedWind.text = "${WeatherInfo.wind.speed} km/h"
             viewBinding.indicatorProgress.isVisible = false
 
+            viewBinding.btnShare.setOnClickListener {
+                val shareIntent = Intent().apply {
+                    this.action = Intent.ACTION_SEND
+                    this.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "The temperature is $temp in ${WeatherInfo.name} and there is ${WeatherInfo.weather[0].main}"
+                    )
+                    this.type = "text/plain"
+                }
+                startActivity(shareIntent)
+            }
 
         }
+
+
     }
 
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarToday.setPadding(0, top, 0, 0)
     }
 
     companion object {
