@@ -1,12 +1,11 @@
-package com.example.weatherapp.screen.main_fragment
+package com.example.weatherapp
 
 import android.location.Location
 import com.example.weatherapp.datastore.AppSettings
-
 import com.example.weatherapp.support.CoroutineViewModel
 import kotlinx.coroutines.launch
 
-class MainFragmentViewModel(private val appSettings: AppSettings) : CoroutineViewModel() {
+class MainActivityViewModel(private val appSettings: AppSettings): CoroutineViewModel() {
 
     fun saveLocation(locationResult: Location) {
         launch {
@@ -15,4 +14,3 @@ class MainFragmentViewModel(private val appSettings: AppSettings) : CoroutineVie
         }
     }
 }
-

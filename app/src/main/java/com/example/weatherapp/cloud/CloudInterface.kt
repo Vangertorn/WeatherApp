@@ -17,6 +17,13 @@ interface CloudInterface {
         @Query("appid") apiId: String
     ): Response<WeatherCloudResult>
 
+    @GET("forecast")
+    suspend fun importForecastWeather(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("appid") apiId: String
+    ): Response<WeatherForecastCloudResult>
+
 
     companion object {
 

@@ -6,26 +6,46 @@
     android:layout_height="match_parent"
     android:background="@color/windowsBackground">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarToday"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/NameToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today" />
+    </androidx.appcompat.widget.Toolbar>
+
+
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/indicatorProgress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/toolbarToday"
+        app:layout_constraintStart_toStartOf="@id/toolbarToday"
+        app:layout_constraintTop_toBottomOf="@id/toolbarToday"
         tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/ivWeather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="46dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="15dp"
         app:layout_constraintBottom_toTopOf="@id/tvLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/ic_baseline_calendar_view_month_24" />
+        tools:src="@drawable/ic_weather_forecast"/>
 
     <TextView
         android:id="@+id/tvLocation"
@@ -43,9 +63,9 @@
         style="@style/Params"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="32sp"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/ivHumidity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

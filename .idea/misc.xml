@@ -3,17 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/background_tab_layout.xml" value="0.34814814814814815" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_baseline_calendar_view_month_24.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_black_white.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_cloud.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_gust_wind.xml" value="0.34814814814814815" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_humidity.xml" value="0.34814814814814815" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_pressure.xml" value="0.34814814814814815" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_speed_wind.xml" value="0.34814814814814815" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_sun.xml" value="0.34814814814814815" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_weather_forecast.xml" value="0.33240740740740743" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/drawable/ic_weather_today.xml" value="0.33240740740740743" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/frafment_forecast.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/fragmennt_activity.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/fragment_activity.xml" value="0.3055555555555556" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/fragment_forecast.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/fragment_today.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/layout/item_weather_forecast.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/menu/main_nav_items.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3435185185185185" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3435185185185185" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Weatherapp/app/src/main/res/xml/network_security_config.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

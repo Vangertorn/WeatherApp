@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.weatherapp.cloud.CloudInterface
 import com.example.weatherapp.datastore.AppSettings
 import com.example.weatherapp.repository.CloudRepository
-import com.example.weatherapp.screen.main_fragment.MainFragmentViewModel
+import com.example.weatherapp.screen.forecast_fragment.ForecastFragmentViewModel
 import com.example.weatherapp.screen.today_fragment.TodayFragmentViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,8 +21,9 @@ class WeatherApp : Application() {
     }
 
     private val viewModel = module {
-        viewModel { MainFragmentViewModel(get()) }
         viewModel { TodayFragmentViewModel(get()) }
+        viewModel { MainActivityViewModel(get()) }
+        viewModel { ForecastFragmentViewModel(get()) }
     }
 
     private val cloudModule = module {
@@ -34,7 +35,7 @@ class WeatherApp : Application() {
         factory { CloudRepository(get(), get()) }
     }
 
-    private val barnModel = module{
+    private val barnModel = module {
         single { AppSettings(get()) }
     }
 }
