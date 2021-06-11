@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarForecast"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +46,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarForecast"
         app:spanCount="1"
-        tools:listitem="@layout/item_weather_forecast"/>
+        tools:listitem="@layout/item_weather_forecast" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

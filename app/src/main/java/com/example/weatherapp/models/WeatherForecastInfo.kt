@@ -4,6 +4,6 @@ data class WeatherForecastInfo (
     val cod: String,
     val message: Long,
     val cnt: Long,
-    val list: List<AdapterList>,
+    val list: List<ViewHolderType>,
     val city: City
 )

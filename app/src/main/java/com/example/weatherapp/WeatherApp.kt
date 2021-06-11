@@ -6,6 +6,7 @@ import com.example.weatherapp.datastore.AppSettings
 import com.example.weatherapp.repository.CloudRepository
 import com.example.weatherapp.screen.forecast_fragment.ForecastFragmentViewModel
 import com.example.weatherapp.screen.today_fragment.TodayFragmentViewModel
+import com.example.weatherapp.support.NetworkConnection
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -16,14 +17,14 @@ class WeatherApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@WeatherApp)
-            modules(listOf(cloudModule, viewModel, repository, barnModel))
+            modules(listOf(cloudModule, viewModel, repository, barnModel, connection))
         }
     }
 
     private val viewModel = module {
-        viewModel { TodayFragmentViewModel(get(), get()) }
-        viewModel { MainActivityViewModel(get()) }
-        viewModel { ForecastFragmentViewModel(get()) }
+        viewModel { TodayFragmentViewModel(get(), get(), get()) }
+        viewModel { MainActivityViewModel(get(), get()) }
+        viewModel { ForecastFragmentViewModel(get(), get()) }
     }
 
     private val cloudModule = module {
@@ -37,5 +38,9 @@ class WeatherApp : Application() {
 
     private val barnModel = module {
         single { AppSettings(get()) }
+    }
+
+    private val connection = module {
+        single { NetworkConnection(get()) }
     }
 }

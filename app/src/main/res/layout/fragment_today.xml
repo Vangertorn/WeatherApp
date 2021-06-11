@@ -9,8 +9,9 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarToday"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,7 @@
             style="@style/NameToolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today" />
+            android:text="@string/today" />
     </androidx.appcompat.widget.Toolbar>
 
 
@@ -45,7 +46,9 @@
         app:layout_constraintBottom_toTopOf="@id/tvLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/ic_weather_forecast"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbarToday"
+        tools:src="@drawable/ic_weather_forecast"
+        android:contentDescription="@string/weather" />
 
     <TextView
         android:id="@+id/tvLocation"
@@ -81,7 +84,8 @@
         app:layout_constraintEnd_toStartOf="@+id/ivPressure"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/humidity" />
 
     <TextView
         android:id="@+id/tvHumidity"
@@ -103,7 +107,8 @@
         app:layout_constraintEnd_toStartOf="@+id/ivClouds"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivHumidity"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/pressure" />
 
     <TextView
         android:id="@+id/tvPressure"
@@ -125,7 +130,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivPressure"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/clouds" />
 
     <TextView
         android:id="@+id/tvClouds"
@@ -147,7 +153,8 @@
         app:layout_constraintEnd_toStartOf="@+id/ivSpeedWind"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvClouds" />
+        app:layout_constraintTop_toBottomOf="@id/tvClouds"
+        android:contentDescription="@string/gust_wind" />
 
     <TextView
         android:id="@+id/tvGustWind"
@@ -169,7 +176,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivGustWind"
-        app:layout_constraintTop_toBottomOf="@id/tvClouds" />
+        app:layout_constraintTop_toBottomOf="@id/tvClouds"
+        android:contentDescription="@string/speed_wind" />
 
     <TextView
         android:id="@+id/tvSpeedWind"
@@ -187,7 +195,7 @@
         style="@style/MyButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share"
+        android:text="@string/share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSpeedWind" />

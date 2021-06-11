@@ -19,17 +19,20 @@ class AppSettings(context: Context) {
     fun coordinatesLonFlow(): Flow<Double> = dataStore.data.map { preferense ->
         preferense[doublePreferencesKey(LON_KEY)] ?: 0.0
     }
-     fun coordinatesLatFlow(): Flow<Double> = dataStore.data.map { preferense ->
+
+    fun coordinatesLatFlow(): Flow<Double> = dataStore.data.map { preferense ->
         preferense[doublePreferencesKey(LAT_KEY)] ?: 0.0
     }
-    suspend fun getLat():Double = coordinatesLatFlow().first()
-    suspend fun getLon():Double = coordinatesLonFlow().first()
+
+    suspend fun getLat(): Double = coordinatesLatFlow().first()
+    suspend fun getLon(): Double = coordinatesLonFlow().first()
 
     suspend fun setLon(lon: Double) {
         dataStore.edit { preferences ->
             preferences[doublePreferencesKey(LON_KEY)] = lon
         }
     }
+
     suspend fun setLat(lat: Double) {
         dataStore.edit { preferences ->
             preferences[doublePreferencesKey(LAT_KEY)] = lat

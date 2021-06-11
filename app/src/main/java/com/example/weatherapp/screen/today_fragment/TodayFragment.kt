@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.weatherapp.R
@@ -22,47 +23,68 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.coordinatesLatLiveData.observe(this.viewLifecycleOwner) {
-            viewModel.requestWeatherInfo()
-            viewBinding.indicatorProgress.isVisible = true
+
+
+        viewModel.coordinatesLatLiveData.observe(this.viewLifecycleOwner) { lat ->
+            viewModel.coordinatesLonLiveData.observe(this.viewLifecycleOwner) { lon ->
+                viewModel.networkConnectionLiveData.observe(this.viewLifecycleOwner) { isConnected ->
+                    if (isConnected) {
+                        viewModel.requestWeatherInfo(lat.toString(), lon.toString())
+                        viewBinding.indicatorProgress.isVisible = true
+                    }
+                }
+            }
+
         }
 
 
         viewModel.weatherInfoLiveData.observe(this.viewLifecycleOwner) { WeatherInfo ->
-            val picasso = Picasso.Builder(requireContext())
-                .listener { _, _, exception -> exception.printStackTrace() }.build()
 
-            picasso.load("$IMAGE_URI${WeatherInfo.weather[0].icon}@2x.png").fit()
-                .error(R.drawable.ic_cloud)
-                .into(viewBinding.ivWeather)
+            if (WeatherInfo == null) {
+                Toast.makeText(
+                    requireContext(),
+                    "It was happen something terrible",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                val picasso = Picasso.Builder(requireContext())
+                    .listener { _, _, exception -> exception.printStackTrace() }.build()
 
-            viewBinding.tvLocation.text = "${WeatherInfo.name}, ${WeatherInfo.sys.country}"
+                picasso.load("$IMAGE_URI${WeatherInfo.weather[0].icon}@2x.png").fit()
+                    .error(R.drawable.ic_cloud)
+                    .into(viewBinding.ivWeather)
 
-            val temp =
-                (WeatherInfo.main.temp - 273).toBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
-            viewBinding.tvWeatherTitle.text = "$temp | ${WeatherInfo.weather[0].main}"
+                viewBinding.tvLocation.text = "${WeatherInfo.name}, ${WeatherInfo.sys.country}"
 
-            viewBinding.tvHumidity.text = "${WeatherInfo.main.humidity}%"
+                val temp =
+                    (WeatherInfo.main.temp - 273).toBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
+                viewBinding.tvWeatherTitle.text = "$temp | ${WeatherInfo.weather[0].main}"
 
-            viewBinding.tvPressure.text = "${WeatherInfo.main.pressure} hPa"
+                viewBinding.tvHumidity.text = "${WeatherInfo.main.humidity}%"
 
-            viewBinding.tvClouds.text = "${WeatherInfo.clouds.all}%"
+                viewBinding.tvPressure.text = "${WeatherInfo.main.pressure} hPa"
 
-            viewBinding.tvGustWind.text = "${WeatherInfo.wind.gust} m/s"
+                viewBinding.tvClouds.text = "${WeatherInfo.clouds.all}%"
 
-            viewBinding.tvSpeedWind.text = "${WeatherInfo.wind.speed} km/h"
-            viewBinding.indicatorProgress.isVisible = false
+                viewBinding.tvGustWind.text = "${WeatherInfo.wind.gust} m/s"
 
-            viewBinding.btnShare.setOnClickListener {
-                val shareIntent = Intent().apply {
-                    this.action = Intent.ACTION_SEND
-                    this.putExtra(
-                        Intent.EXTRA_TEXT,
-                        "The temperature is $temp in ${WeatherInfo.name} and there is ${WeatherInfo.weather[0].main}"
-                    )
-                    this.type = "text/plain"
+                viewBinding.tvSpeedWind.text = "${WeatherInfo.wind.speed} km/h"
+                viewBinding.indicatorProgress.isVisible = false
+
+
+
+                viewBinding.btnShare.setOnClickListener {
+                    val shareIntent = Intent().apply {
+                        this.action = Intent.ACTION_SEND
+                        this.putExtra(
+                            Intent.EXTRA_TEXT,
+                            "The temperature is $temp in ${WeatherInfo.name} and there is ${WeatherInfo.weather[0].main}"
+                        )
+                        this.type = "text/plain"
+                    }
+                    startActivity(shareIntent)
                 }
-                startActivity(shareIntent)
+
             }
 
         }
@@ -72,6 +94,7 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
 
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
+        viewBinding.toolbarToday.setPadding(0, top, 0, 0)
     }
 
     companion object {

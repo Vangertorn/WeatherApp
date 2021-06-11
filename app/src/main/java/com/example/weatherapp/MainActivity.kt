@@ -1,19 +1,19 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.weatherapp
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.support.SupportActivityInset
-import com.example.weatherapp.support.setVerticalMargin
-import com.example.weatherapp.support.setWindowTransparency
+import com.example.weatherapp.support.*
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -34,8 +34,20 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setWindowTransparency(this)
+
+
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+
+        viewModel.networkConnectionLiveData.observe(this, { isConnected ->
+            if (isConnected) {
+                viewBinding.layoutDisconnected.visibility = View.GONE
+            } else {
+                viewBinding.layoutDisconnected.visibility = View.VISIBLE
+            }
+        })
         Dexter.withContext(applicationContext).withPermissions(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -44,20 +56,16 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermis
         val navController: NavController = navHostFragment.navController
         viewBinding.bottomNavigationView.setupWithNavController(navController)
 
-
-
-
-        viewBinding.bottomNavigationView.setVerticalMargin(marginBottom = 125)
-        setWindowTransparency(this)
-
     }
+
+
     override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
         if (report!!.areAllPermissionsGranted()) {
             buildLocationRequest()
             buildLocationCallBack()
 
             if (ActivityCompat.checkSelfPermission(
-                  applicationContext,
+                    applicationContext,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                     applicationContext,
@@ -76,6 +84,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermis
             )
         }
     }
+
     private fun buildLocationCallBack() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -99,11 +108,19 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermis
         p0: MutableList<PermissionRequest>?,
         p1: PermissionToken?
     ) {
-        Snackbar.make(viewBinding.bottomNavigationView, "Permission Denied", Snackbar.LENGTH_LONG).show()
+        Snackbar.make(viewBinding.bottomNavigationView, "Permission Denied", Snackbar.LENGTH_LONG)
+            .show()
     }
+
 
     override fun getActiveFragment(): Fragment? {
         return navHostFragment.childFragmentManager.fragments[0]
+    }
+
+    override fun insetsChanged(statusBarSize: Int, navigationBarSize: Int, hasKeyboard: Boolean) {
+        super.insetsChanged(statusBarSize, navigationBarSize, hasKeyboard)
+        viewBinding.bottomNavigationView.setVerticalMargin(marginBottom = navigationBarSize)
+
     }
 
 }
