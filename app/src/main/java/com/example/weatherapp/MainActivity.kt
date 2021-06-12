@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -108,8 +110,11 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermis
         p0: MutableList<PermissionRequest>?,
         p1: PermissionToken?
     ) {
-        Snackbar.make(viewBinding.bottomNavigationView, "Permission Denied", Snackbar.LENGTH_LONG)
-            .show()
+        Toast.makeText(
+            this,
+            "Permission Denied",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 

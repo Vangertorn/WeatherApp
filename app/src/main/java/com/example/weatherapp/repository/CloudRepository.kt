@@ -74,7 +74,18 @@ class CloudRepository(
                     }
                 }
             }
-            list.add(0, ViewHolderType.Day("today"))
+            if (dayNameFormatter.format((list[0] as ViewHolderType.ListElement).dt * 1000) != dayNameFormatter.format(
+                    Date()
+                )
+            ) {
+                list.add(
+                    0,
+                    ViewHolderType.Day(dayNameFormatter.format((list[0] as ViewHolderType.ListElement).dt * 1000))
+                )
+            } else {
+                list.add(0, ViewHolderType.Day("today"))
+            }
+
 
             return WeatherForecastInfo(
                 cod = weatherForecastCloudResult.cod,
