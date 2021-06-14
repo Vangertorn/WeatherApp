@@ -40,14 +40,6 @@ class NetworkConnection(private val context: Context) : LiveData<Boolean>() {
         }
     }
 
-//    override fun onInactive() {
-//        super.onInactive()
-//        if (flag) {
-//            connectivityManager.unregisterNetworkCallback(connectivityManagerCallback())
-//        }
-//
-//    }
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun lollipopVersionRequest() {
         val requestBuilder =
