@@ -34,7 +34,6 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
                     }
                 }
             }
-
         }
 
 
@@ -54,11 +53,17 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
                     .error(R.drawable.ic_cloud)
                     .into(viewBinding.ivWeather)
 
-                viewBinding.tvLocation.text = "${WeatherInfo.name}, ${WeatherInfo.sys.country}"
 
                 val temp =
-                    (WeatherInfo.main.temp - 273).toBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
-                viewBinding.tvWeatherTitle.text = "$temp | ${WeatherInfo.weather[0].main}"
+                    (WeatherInfo.main.temp - 273).toBigDecimal()
+                        .setScale(1, RoundingMode.HALF_EVEN)
+                val weather = WeatherInfo.weather[0].main
+
+                val location = WeatherInfo.name
+
+                viewBinding.tvLocation.text = "$location, ${WeatherInfo.sys.country}"
+
+                viewBinding.tvWeatherTitle.text = "$temp | $weather"
 
                 viewBinding.tvHumidity.text = "${WeatherInfo.main.humidity}%"
 
@@ -69,6 +74,7 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
                 viewBinding.tvGustWind.text = "${WeatherInfo.wind.gust} m/s"
 
                 viewBinding.tvSpeedWind.text = "${WeatherInfo.wind.speed} km/h"
+
                 viewBinding.indicatorProgress.isVisible = false
 
 
@@ -76,17 +82,17 @@ class TodayFragment : SupportFragmentInset<FragmentTodayBinding>(R.layout.fragme
                 viewBinding.btnShare.setOnClickListener {
                     val shareIntent = Intent().apply {
                         this.action = Intent.ACTION_SEND
+                        val value =
+                            "The temperature is $temp in $location and there is $weather"
                         this.putExtra(
                             Intent.EXTRA_TEXT,
-                            "The temperature is $temp in ${WeatherInfo.name} and there is ${WeatherInfo.weather[0].main}"
+                            value
                         )
                         this.type = "text/plain"
                     }
                     startActivity(shareIntent)
                 }
-
             }
-
         }
 
 

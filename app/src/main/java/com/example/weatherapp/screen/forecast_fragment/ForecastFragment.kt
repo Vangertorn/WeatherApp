@@ -21,7 +21,6 @@ class ForecastFragment : SupportFragmentInset<FragmentForecastBinding>(R.layout.
         viewModel.networkConnectionLiveData.observe(this.viewLifecycleOwner) {
             if (it) {
                 viewModel.requestForecastWeatherInfo()
-
                 viewBinding.indicatorProgress.isVisible = true
             }
 

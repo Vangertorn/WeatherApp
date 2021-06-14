@@ -28,7 +28,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermissionsListener {
 
     override lateinit var viewBinding: ActivityMainBinding
-    private val navHostFragment by lazy { supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment }
+    private val navHostFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+    }
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
@@ -74,7 +76,6 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), MultiplePermis
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-
                 return
             }
             fusedLocationProviderClient =

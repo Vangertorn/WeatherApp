@@ -19,7 +19,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_weather_today" />
+            tools:src="@drawable/ic_weather_today"
+            android:contentDescription="@string/imageweather" />
 
         <TextView
             android:id="@+id/tvTime"
@@ -52,6 +53,7 @@
             android:layout_marginStart="30dp"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

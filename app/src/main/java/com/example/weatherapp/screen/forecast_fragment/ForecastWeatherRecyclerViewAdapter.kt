@@ -45,9 +45,11 @@ class ForecastWeatherRecyclerViewAdapter(
         position: Int
     ) {
         if (getItemViewType(position) == TYPE_FORECAST_HOLDER) {
-            (holder as ForecastWeatherViewHolder).bind(weatherForecastInfo.list[position] as ViewHolderType.ListElement)
+            (holder as ForecastWeatherViewHolder)
+                .bind(weatherForecastInfo.list[position] as ViewHolderType.ListElement)
         } else {
-            (holder as DayWeatherViewHolder).bind(weatherForecastInfo.list[position] as ViewHolderType.Day)
+            (holder as DayWeatherViewHolder)
+                .bind(weatherForecastInfo.list[position] as ViewHolderType.Day)
         }
     }
 

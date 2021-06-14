@@ -11,8 +11,10 @@ class ForecastFragmentViewModel(
     private val cloudRepository: CloudRepository,
     networkConnection: NetworkConnection
 ) : CoroutineViewModel() {
+
     val weatherForecastInfoLiveData = MutableLiveData<WeatherForecastInfo?>()
     val networkConnectionLiveData = networkConnection
+
     fun requestForecastWeatherInfo() {
         launch {
             weatherForecastInfoLiveData.postValue(cloudRepository.importForecastWeather())

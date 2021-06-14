@@ -34,7 +34,10 @@ interface CloudInterface {
                 .client(
                     OkHttpClient.Builder().apply {
                         if (BuildConfig.DEBUG) {
-                            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                            addInterceptor(
+                                HttpLoggingInterceptor()
+                                    .setLevel(HttpLoggingInterceptor.Level.BODY)
+                            )
                         }
                     }.build()
                 ).build().create(CloudInterface::class.java)

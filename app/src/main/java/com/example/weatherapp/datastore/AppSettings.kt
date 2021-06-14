@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("${BuildConfig.APPLICATION_ID}_datastore")
+private val Context.dataStore: DataStore<Preferences>
+        by preferencesDataStore("${BuildConfig.APPLICATION_ID}_datastore")
 
 class AppSettings(context: Context) {
     private val dataStore = context.dataStore

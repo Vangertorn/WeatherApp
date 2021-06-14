@@ -60,7 +60,9 @@ class CloudRepository(
             list.addAll(weatherForecastCloudResult.list)
             for (index in list.indices) {
                 if (index > 0) {
-                    if (list[index] is ViewHolderType.ListElement && list[index - 1] is ViewHolderType.ListElement) {
+                    if (list[index] is ViewHolderType.ListElement && list[index - 1]
+                                is ViewHolderType.ListElement
+                    ) {
                         val item = list[index] as ViewHolderType.ListElement
                         val lastItem = list[index - 1] as ViewHolderType.ListElement
                         val day = dayNameFormatter.format(item.dt * 1000)
@@ -74,13 +76,19 @@ class CloudRepository(
                     }
                 }
             }
-            if (dayNameFormatter.format((list[0] as ViewHolderType.ListElement).dt * 1000) != dayNameFormatter.format(
+            if (dayNameFormatter.format((list[0] as ViewHolderType.ListElement).dt * 1000)
+                != dayNameFormatter.format(
                     Date()
                 )
             ) {
                 list.add(
                     0,
-                    ViewHolderType.Day(dayNameFormatter.format((list[0] as ViewHolderType.ListElement).dt * 1000))
+                    ViewHolderType.Day(
+                        dayNameFormatter.format(
+                            (list[0]
+                                    as ViewHolderType.ListElement).dt * 1000
+                        )
+                    )
                 )
             } else {
                 list.add(0, ViewHolderType.Day("today"))
